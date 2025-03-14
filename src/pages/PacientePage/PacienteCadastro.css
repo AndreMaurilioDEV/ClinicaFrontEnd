@@ -1,0 +1,37 @@
+.cadastro-sec h2 {
+  border-bottom: 1px solid #c9c9c9;
+  padding-bottom: 20px;
+  text-align: left;
+}
+
+.div-cadastro p {
+  font-size: 14px;
+}
+
+.div-cadastro {
+  padding: 30px;
+  background-color: white;
+  border: 1px solid #dcdcdc;
+  border-radius: 20px;
+  width: 55%;
+}
+
+.div-cadastro-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.div-cadastro-1 {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  gap: 35px;
+  flex: 1;
+}
+
+
+.MuiInputBase-root {
+  max-width: 100%;
+  padding: 10px;
+}

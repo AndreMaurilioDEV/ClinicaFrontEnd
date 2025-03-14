@@ -1,0 +1,47 @@
+.cadastro-consulta .form-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cadastro-consulta label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Inputs e Selects */
+.cadastro-consulta input, 
+.cadastro-consulta select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.cadastro-consulta .btn-cadastrar {
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.cadastro-consulta .btn-cadastrar:hover {
+  background-color: #45a049;
+}
+
+.cadastro-consulta .input-horario {
+  width: 120px; 
+  padding: 6px; 
+  font-size: 14px; 
+}
+
+.cadastro-consulta h2 {
+  text-align: center;
+}

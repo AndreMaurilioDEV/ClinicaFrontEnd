@@ -1,0 +1,423 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  height: 100vh;
+  margin: 0;
+  width: calc(100vw - (100vw - 100%));
+}
+
+#root {
+  height: 100vh;
+  font-family: "Poppins", serif;
+}
+
+h1 {
+  margin: 0;
+}
+
+.div-filters {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  margin: 20px 0px 40px 0px;
+}
+
+label {
+  display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+tbody tr {
+  border: 1px solid #ccc;
+}
+
+thead tr {
+  border: none;
+}
+
+td {
+  padding: 28px;
+}
+
+th {
+  padding: 10px;
+  margin-top: 50px;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  width: 100%;
+}
+
+tbody tr.rounded-row {
+  background-color: white;
+  /* Cor de fundo opcional */
+  border: 1px solid #ccc;
+  /* Define a borda para o "tr" */
+  border-radius: 10px;
+  /* Aplica cantos arredondados */
+  text-align: center;
+}
+
+tbody tr.rounded-row td {
+  border: none;
+  /* Remove bordas internas das células */
+  padding: 30px 10px;
+  /* Ajusta o espaçamento */
+}
+
+tbody tr.rounded-row td:first-child {
+  border-top-left-radius: 10px;
+  /* Canto superior esquerdo */
+  border-bottom-left-radius: 10px;
+  /* Canto inferior esquerdo */
+}
+
+tbody tr.rounded-row td:last-child {
+  border-top-right-radius: 10px;
+  /* Canto superior direito */
+  border-bottom-right-radius: 10px;
+  /* Canto inferior direito */
+}
+
+.div-agenda-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.div-filters select {
+  border: 0;
+  outline: 0;
+  background-color: white;
+  border-radius: 5px;
+  padding: 0 120px 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(165, 164, 164);
+  height: 45px;
+}
+
+input[type="date"] {
+  background-color: #0080ff;
+  padding: 5px;
+  font-family: "Roboto Mono", monospace;
+  color: #ffffff;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+::-webkit-calendar-picker-indicator {
+  background-color: #ffffff;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+select option:disabled {
+  color: gray;
+  /* Cor do texto */
+  background-color: #f0f0f0;
+  /* Cor de fundo */
+  font-style: italic;
+  /* Estilo da fonte */
+}
+
+.div-agenda-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-agendamento {
+  background-color: #0080ff;
+  padding: 15px;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 600;
+}
+
+
+.div-flex-menu-option {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.div-flex-menu-option svg {
+  font-size: 25px;
+}
+
+.div-flex-options-consulta {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+
+
+
+.modal-Cadastro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.model-content { 
+  padding: 50px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+
+
+
+
+.div-cadastro-form-5 {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.div-form-cadastro-buttons {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.div-cadastro-flex label {
+  margin: 0 0;
+}
+
+/*input { 
+  width: 100%;
+}*/
+
+
+/*.div-cadastro-flex input, .InputMask {
+  width: 100%;  
+  padding: 10px 5px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}*/
+
+input[readonly] {
+  background-color: #f0f0f0; /* Alterar cor de fundo para inputs de leitura */
+}
+
+.div-flex-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.cadastro-planos-infos {
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.cadastro-planos-infos label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Botões */
+.div-form-cadastro-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.button-geral-class {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-geral-class:hover {
+  background-color: #45a049;
+}
+
+/* Botão de voltar */
+.button-geral-class:last-child {
+  background-color: #f44336;
+}
+
+.button-geral-class:last-child:hover {
+  background-color: #e53935;
+}
+
+div label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.MuiInputBase-root {
+  width: 100%;
+  max-width: 250px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+}
+.datepicker-toggle {
+  display: inline-block;
+  position: relative;
+  width: 18px;
+  height: 19px;
+}
+.datepicker-toggle-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;base64,...');
+}
+
+.datepicker-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.datepicker-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+
+.select-especialidade {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.inp-text-search {
+  height: 45px;
+  border: 0;
+  outline: 0;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'Poppins';
+  padding-left: 15px;
+}
+
+.inp-text-search:focus {
+  border: 1px solid #ccc;
+}
+
+.icons-acoes:first-child {
+  color: green; /* Cor do primeiro ícone */
+  font-size: 1.5rem; /* Tamanho personalizado */
+  background-color: white; /* Cor de fundo */
+  border: none; /* Remove borda */
+  padding: 10px;
+  border-radius: 50%; /* Deixa o botão circular */
+  cursor: pointer; /* Aponta que é clicável */
+}
+
+.div-flex-options-consulta .icons-acoes:nth-child(2) {
+  color: red; /* Estilo para o segundo botão */
+}
+
+.div-flex-options-consulta .icons-acoes:nth-child(3) {
+  color: blue; /* Estilo para o terceiro botão */
+}
+
+.icons-acoes {
+  border: 0;
+  outline: 0;
+  background-color: white;
+  font-size: 22px;
+}
+
+.custom-textfield {
+  height: 45px;
+}
+
+.custom-textfield .MuiInputBase-input {
+  padding: 0; /* Muda a cor do texto */
+}
+
+.form-control-consultas {
+  display: flex;
+  height: 45px;
+  width: 170px;
+}
+
+.form-control-consultas:nth-child(2) {
+  width: 200px;
+}
+
+.form-control-consultas:nth-child(3) {
+  width: 170px;
+}
+
+.form-control-consultas:nth-child(4) {
+  width: 200px;
+}
+
+.css-ytlejw-MuiFormControl-root {
+  flex-direction: row !important;
+  -webkit-flex-direction: row !important;
+}
+
+
+.custom-textfield .MuiInputLabel-root {
+  font-size: 14px;
+}
+
+.cadastro-sec h2 {
+  text-align: center;
+}
+
+.css-7y9k7a-MuiPaper-root-MuiAlert-root {
+  position: absolute;
+  top: 12rem;
+  right: 0;
+  padding: 15px 25px;
+} 
+
+.MuiButtonBase-root {
+  gap: 15px;
+}
+

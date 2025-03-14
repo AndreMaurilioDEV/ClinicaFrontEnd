@@ -1,0 +1,236 @@
+.main-content {
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-relatorios-infos {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-relatorios-infos i {
+  margin-right: 10px;
+}
+
+.menu {
+  width: 15%;
+  /* Largura do menu lateral */
+  background-color: white;
+  /* Cor de fundo para destacar o menu */
+  padding: 20px;
+  /* Espaçamento interno */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  /* Sombra para dar destaque */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* Espaço entre os itens do menu */
+}
+
+.menu h1 {
+  font-size: 24px;
+  /* Tamanho maior para o título */
+  margin-bottom: 20px;
+  /* Espaçamento abaixo do título */
+  color: #1e757a;
+  /* Cor personalizada */
+  text-align: center;
+}
+
+.menu h3 {
+  margin-top: 20px;
+  /* Espaçamento acima das seções */
+  font-size: 18px;
+  color: #555;
+  /* Cor neutra */
+}
+
+.menu h4 {
+  font-size: 16px;
+  margin: 25px 0;
+  /* Espaçamento vertical entre os links */
+  cursor: pointer;
+  /* Indica interatividade */
+  color: #007bff;
+  /* Azul para links */
+}
+
+.menu h4:hover {
+  text-decoration: underline;
+  /* Sublinha ao passar o mouse */
+  color: #0056b3;
+  /* Azul mais escuro */
+}
+
+.button-geral-class {
+  margin: 10px 0;
+  /* Espaçamento acima e abaixo */
+  padding: 10px 15px;
+  background-color: #28a745;
+  /* Cor de destaque para o botão */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  /* Bordas arredondadas */
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.menu button:hover {
+  background-color: #218838;
+  /* Cor mais escura ao passar o mouse */
+}
+
+.content {
+  width: 95%;
+  /* Resto do espaço da tela */
+  padding: 0 30px;
+  /* Espaçamento interno */
+  background-color: #f5f5f5;
+  /* Fundo branco */
+  min-height: 100vh;
+}
+
+.content-dashboard {
+  width: 100%;
+}
+
+
+.content-info-name {
+  border-radius: 15px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: auto;
+  width: auto;
+  height: 1px;
+}
+
+header {
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-content {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 25px;
+}
+
+.header-content span {
+  font-size: 40px;
+  display: flex;
+}
+
+
+.div-dashboard-filters {
+  display: flex;
+  gap: 150px;
+  padding: 45px 0;
+  border-bottom: 1px solid;
+}
+
+.div-dashboard-filters span {
+  margin-right: 25px;
+}
+
+.select-dash-filter {
+  padding: 5px 25px 5px 10px;
+}
+
+.dashboard-relatorios {
+  padding: 20px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid #b4b1b1;
+}
+
+.dashboard-relatorios-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.dashboard-relatorios-card span {
+  font-size: 65px;
+}
+
+.div-flex-menu-option button {
+  background-color: white;
+  color: black;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  margin: 0;
+}
+
+.div-flex-menu-option button:hover {
+  background-color: #f5f5f5;
+}
+
+.div-flex-menu-option span {
+  gap: 20px;
+  font-size: 18px;
+  color: #555;
+  font-weight: 600;
+}
+
+.div-pacientes {
+  background-color: white;
+  width: 25%;
+  padding-left: 20px;
+  border: 1px solid #b4b1b1;
+}
+
+.div-pacientes-details {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 25px;
+}
+
+.div-pacientes-details>div {
+  border-bottom: 1px solid gray;
+}
+
+.div-pacientes-details>div:nth-last-child(1) {
+  border-bottom: 0;
+}
+
+.div-flex-relatorio-1 {
+  display: flex;
+  margin: 25px 0;
+}
+
+.div-consultas-hoje {
+  background-color: white;
+  width: 25%;
+  padding-left: 20px;
+  border: 1px solid #b4b1b1;
+}
+
+.div-flex-consultas-hoje {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  gap: 10px;
+}

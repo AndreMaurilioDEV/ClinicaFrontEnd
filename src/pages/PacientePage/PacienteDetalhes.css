@@ -1,0 +1,146 @@
+.detalhes-sec {
+  background-color: white;
+}
+
+.detalhes-div-flex {
+  flex-direction: column;
+  display: flex;
+  gap: 58px;
+  padding-top: 30px;
+}
+
+.div-1 {
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  justify-content: space-around;
+  width: 100%; 
+  gap: 20px; 
+}
+
+.div-1 img {
+  width: 250px;
+  height: 200px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.div-1 .info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.div-1 h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+}
+
+.div-1 p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+}
+
+.div-1 ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.div-1 button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: flex;
+  font-weight: 700;
+  gap: 7px;
+}
+
+.div-1 button:hover {
+  background-color: #0056b3;
+}
+
+
+.div-1 ul li {
+  list-style-type: none;
+}
+.div-2 {
+  display: flex;
+  gap: 70px;
+  padding: 0 25px;
+}
+
+.div-1 ul {
+  display: flex;
+  gap: 20px;
+}
+
+.detalhes-div-filtros {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 colunas */
+}
+
+.detalhes-div-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.detalhes-div-filtros .detalhes-div-card:first-child {
+  border-left: none;
+}
+
+.detalhes-div-filtros .detalhes-div-card:last-child {
+  border-right: none;
+}
+
+.detalhes-div-filtros .detalhes-div-card {
+  border-bottom: none;
+}
+
+.detalhes-div-card p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.detalhes-div-card span {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+
+.div-flex-infos {
+  display: flex;
+  gap: 5px;
+}
+
+.div-flex-infos  span {
+  font-size: 18px;
+}
+
+.div-flex-infos + p {
+  color: gray;
+}
+
+.rounded-row button {
+  border: 0;
+  background-color: white;
+}
+
+.rounded-row span {
+  font-size: 1.5rem;
+  color: #007bff;
+}

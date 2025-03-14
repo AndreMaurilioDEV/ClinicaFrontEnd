@@ -1,0 +1,119 @@
+.div-box-flex {
+  display: flex; /* Transforma a div em um contêiner flexível */
+  height: 100vh; /* Ocupa toda a altura da viewport */
+  width: 100vw; /* Ocupa toda a largura da viewport */
+}
+
+.div-header-sec-login {
+  width: 100%;
+}
+
+
+.background-section {
+  flex: 6; /* Define 60% do espaço */
+  background-image: url('../../assets/bg-login.jpg'); /* Imagem de fundo */
+  background-size: cover; /* Ajusta a imagem para cobrir */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Evita repetição da imagem */
+}
+
+.sec-login {
+  flex: 4; /* Define 40% do espaço */
+  padding: 40px; /* Espaçamento interno */
+  background-color: #f5f5f5; /* Cor de fundo */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+  display: flex;
+  gap: 40px;
+  flex-direction: column; /* Organiza o conteúdo verticalmente */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+}
+
+
+.options-login div {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px; 
+}
+
+.options-login button {
+  padding: 10px 20px;
+  background-color: #1e757a; 
+  color: white;
+  border: none;
+  border-radius: 5px; 
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.options-login button:hover {
+  background-color: #8BCF94; 
+}
+
+
+.form-login input {
+  width: 95%; 
+  padding: 10px;
+  margin-bottom: 15px; 
+  background-color: #13121207;
+  border: 0; /* Remove todas as bordas */
+  border-bottom: 1px solid #1e757a; /* Borda inferior inicial */
+  transition: border-bottom-color 0.3s ease; /* Animação suave ao mudar a cor */
+}
+
+.form-login .span-input span{
+  margin: 5px;
+}
+
+.form-login input:focus {
+  border-bottom: 1px solid #8BCF94; /* Cor da borda ao focar */
+  outline: none; /* Remove o contorno padrão */
+}
+
+
+.form-login button {
+  width: 100%; 
+  padding: 10px;
+  background-color: #1e757a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.form-login button:hover {
+  background-color: #8BCF94; 
+}
+
+.form-login {
+  width: 100%; 
+  display: flex;
+  flex-direction: column; 
+  gap: 10px; 
+}
+
+
+.header-sec-login h2 {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.header-sec-login p {
+  color: gray;
+}
+
+.options-login button:focus {
+  background-color: #3ED2A4;  /* Cor quando o botão está selecionado */
+  outline: none; /* Remove a borda padrão de seleção */
+}
+
+.sec-login span {
+  color: gray;
+}
+
+

@@ -1,0 +1,76 @@
+.div-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh
+}
+
+.sec-form {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.sec-form p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.sec-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.sec-form label {
+  font-size: 1rem;
+  color: #555;
+}
+
+.sec-form input {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.sec-form button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.sec-form button:hover {
+  background: #0056b3;
+}
+
+.sec-form span {
+  color: #007bff;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: color 0.3s ease;
+}
+
+.sec-form span:hover {
+  color: #0056b3;
+}
+
+.div-verificacao {
+  display: flex;
+  flex-direction: column;
+}
