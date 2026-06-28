@@ -63,9 +63,8 @@ export const fetchGet = async (endpoint: string) => {
 
 export const fetchStatus = async (id: number, endpoint: string, payload: object) => {
   try {
-    const axiosConfig = { headers: { 'Content-Type': 'application/json' } };
-    const response = await axios.put(`${API_URL}/${endpoint}/${id}`, payload, axiosConfig);
-    console.log('Status da consulta atualizado com sucesso:', response.data);
+    const response = await api.put(`${endpoint}/${id}`, payload);
+    return response.data;
   } catch (error) {
     console.error('Erro ao atualizar o status da consulta:', error);
   }
@@ -73,9 +72,8 @@ export const fetchStatus = async (id: number, endpoint: string, payload: object)
 
 export const fetchDelete = async (endpoint: string, id: number) => {
   try {
-    const axiosConfig = { headers: { 'Content-Type': 'application/json' } };
-    await axios.delete(`${API_URL}/${endpoint}/${id}`, axiosConfig);
-    console.log('Item excluído com sucesso:', id);
+    const response = await api.delete(`${endpoint}/${id}`);
+    return response.data;
   } catch (error) {
     console.error('Erro ao excluir item:', error);
   }

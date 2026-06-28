@@ -4,13 +4,13 @@ import Login from './pages/LoginPage/Login'
 import DashboardPage from './pages/DashboardPage/DashboardPage'
 import ThemeProvider from './themeProvider/theme'
 import CadastroDoutor from './pages/ProfissionalPage/ProfissionalCadastro';
-import PacienteCadastro from './pages/PacientePage/ClienteCadastro';
+import ClienteCadastro from './pages/ClientePage/ClienteCadastro';
 import Consultas from './pages/ConsultaPages/Consultas'
 import MainLayout from './Outlet/mainLayout'
 import Doutores from './pages/ProfissionalPage/Profissionais'
-import Pacientes from './pages/PacientePage/Clientes'
+import Clientes from './pages/ClientePage/Clientes'
 import CadastroConsulta from './pages/ConsultaPages/ConsultaCadastro'
-import PacienteDetalhes from './pages/PacientePage/ClienteDetalhes'
+import ClienteDetalhes from './pages/ClientePage/ClienteDetalhes'
 import AlterarSenha from './pages/LoginPage/AlterarSenha'
 import RedifinicaoRequest from './pages/SenhaPages/RedifinicaoRequest'
 import ConfirmarRedefinicao from './pages/SenhaPages/ConfirmarRedifinicao'
@@ -39,12 +39,12 @@ function App() {
             <Route element={<MainLayout />}>
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/consultas" element={<Consultas />} />
-              <Route path="/cadastro-paciente" element={<PacienteCadastro />} />
+              <Route path="/cadastro-paciente" element={<ClienteCadastro />} />
               <Route path="/visualizar-doutores" element={<Doutores />} />
-              <Route path="/visualizar-pacientes" element={<Pacientes />} />
+              <Route path="/visualizar-pacientes" element={<Clientes />} />
               <Route path="/cadastro-doutor" element={<CadastroDoutor />} />
               <Route path="/cadastro-consulta" element={<CadastroConsulta />} />
-              <Route path="/visualizar-pacientes-detalhes/:id" element={<PacienteDetalhes />} />
+              <Route path="/visualizar-pacientes-detalhes/:id" element={<ClienteDetalhes />} />
             </Route>
           </Routes>
         </SnackbarProvider>

@@ -16,17 +16,17 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { fetchStatus } from "../../api/api";
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import AlertDialog from "../../components/alertDialog";
+import ConfirmDialog from "../../components/ConfirmDialog";
 import { useAuth } from "../../hooks/AuthProvider";
-import { API_URL } from "../../api/api";
 import { useSnackbar } from "notistack";
 import "./Consultas.css";
 
 const STATUS_STYLES: Record<string, { bg: string; color: string }> = {
   AGENDADO: { bg: "#e6f1fb", color: "#0c447c" },
+  CONFIRMADO: { bg: "#eaf3de", color: "#27500a" },
   ATENDIDO: { bg: "#eaf3de", color: "#27500a" },
   FALTOU: { bg: "#fcebeb", color: "#791f1f" },
 };
@@ -49,6 +49,9 @@ const Consultas = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
+
+  const [pendingFaltaId, setPendingFaltaId] = useState<number | null>(null);
+
   const { api } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -82,14 +85,14 @@ const Consultas = () => {
 
   const navigate = useNavigate();
 
-  // Navegação de data sem libs externas: soma/subtrai 1 dia em string "YYYY-MM-DD"
   const shiftDate = (days: number) => {
     const [ano, mes, dia] = selectedDate.split("-").map(Number);
     const date = new Date(ano, mes - 1, dia);
     date.setDate(date.getDate() + days);
-    const novaData = date.toISOString().split("T")[0];
-    setSelectedDate(novaData);
+    setSelectedDate(date.toISOString().split("T")[0]);
   };
+
+  const irParaHoje = () => setSelectedDate(today);
 
   const formatDateLabel = (isoDate: string) => {
     const [ano, mes, dia] = isoDate.split("-").map(Number);
@@ -103,22 +106,39 @@ const Consultas = () => {
     return label.charAt(0).toUpperCase() + label.slice(1);
   };
 
-  const handleStatus = (id: number, value: string) => {
+  const aplicarStatus = (id: number, value: string) => {
     setStatusUpdates((prev) => ({
       ...prev,
       [id]: value
     }));
     const consultaId = consultas ? consultas.find((item) => item.id === id) : null;
-    const payload = {
-      status: value
-    };
+    const payload = { status: value };
     if (consultaId) {
       setTimeout(async () => await api.put(`/consultas/status-consulta/${id}`, payload), 0);
       enqueueSnackbar("Status do atendimento atualizado com sucesso!!", { variant: "success" });
     } else {
       enqueueSnackbar("Erro ao atualizar o status da consulta!!", { variant: "error" });
     }
-  }
+  };
+
+  const handleStatus = (id: number, value: string) => {
+    if (value === 'FALTOU') {
+      setPendingFaltaId(id);
+      return;
+    }
+    aplicarStatus(id, value);
+  };
+
+  const handleConfirmFalta = () => {
+    if (pendingFaltaId !== null) {
+      aplicarStatus(pendingFaltaId, 'FALTOU');
+    }
+    setPendingFaltaId(null);
+  };
+
+  const pacienteNomeFalta = pendingFaltaId !== null
+    ? consultas?.find((c) => c.id === pendingFaltaId)?.pacienteNome
+    : '';
 
   const handleClickOpenDialog = (id: number) => {
     setDeleteItemId(id);
@@ -173,13 +193,28 @@ const Consultas = () => {
           <button onClick={() => shiftDate(-1)} aria-label="Dia anterior">
             <IoChevronBack />
           </button>
-          <span>
+
+          <div className="agenda-date-picker">
             <IoCalendarOutline />
-            {formatDateLabel(selectedDate)}
-          </span>
+            <span>{formatDateLabel(selectedDate)}</span>
+            <input
+              type="date"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+              className="agenda-date-input"
+              aria-label="Escolher outra data"
+            />
+          </div>
+
           <button onClick={() => shiftDate(1)} aria-label="Próximo dia">
             <IoChevronForward />
           </button>
+
+          {selectedDate !== today && (
+            <button onClick={irParaHoje} className="agenda-btn-hoje">
+              Hoje
+            </button>
+          )}
         </div>
 
         <div className="agenda-filtros">
@@ -194,6 +229,7 @@ const Consultas = () => {
                 label="Status"
               >
                 <MenuItem value="AGENDADO">Agendado</MenuItem>
+                <MenuItem value="CONFIRMADO">Confirmado</MenuItem>
                 <MenuItem value="ATENDIDO">Atendido</MenuItem>
                 <MenuItem value="FALTOU">Faltou</MenuItem>
               </Select>
@@ -281,6 +317,7 @@ const Consultas = () => {
                         }}
                       >
                         <MenuItem value="AGENDADO">Agendado</MenuItem>
+                        <MenuItem value="CONFIRMADO">Confirmado</MenuItem>
                         <MenuItem value="ATENDIDO">Atendido</MenuItem>
                         <MenuItem value="FALTOU">Faltou</MenuItem>
                       </Select>
@@ -318,6 +355,16 @@ const Consultas = () => {
         onClose={() => setOpenDialog(false)}
         onConfirm={handleDeleteConfirm}
         itemId={deleteItemId!}
+      />
+
+      <ConfirmDialog
+        open={pendingFaltaId !== null}
+        title="Confirmar falta?"
+        message={`Marcar ${pacienteNomeFalta || 'este paciente'} como FALTOU? Essa ação afeta o histórico do paciente e a taxa de comparecimento.`}
+        confirmLabel="Marcar falta"
+        confirmColor="error"
+        onClose={() => setPendingFaltaId(null)}
+        onConfirm={handleConfirmFalta}
       />
     </>
   )

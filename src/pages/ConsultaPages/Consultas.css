@@ -195,6 +195,49 @@
   font-size: 0.9rem;
 }
 
+.agenda-date-picker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+}
+
+.agenda-date-picker svg {
+  color: #1e757a;
+  font-size: 15px;
+}
+
+.agenda-date-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.agenda-btn-hoje {
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #1e757a;
+  background: #fff;
+  color: #1e757a;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.agenda-btn-hoje:hover {
+  background: #e6f2f2;
+}
+
 @media (max-width: 900px) {
   .agenda-filtros-grid {
     grid-template-columns: 1fr 1fr;
