@@ -1,178 +1,99 @@
-import { Outlet, useNavigate } from 'react-router-dom';
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { SlSettings } from "react-icons/sl";
-import { CiHome } from "react-icons/ci";
-import { TfiAgenda } from "react-icons/tfi";
-import { MdOutlinePersonOutline, MdOutlineLogout, MdOutlineExpandMore } from "react-icons/md";
-import { FaRegUser } from "react-icons/fa";
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { API_URL } from '../api/api';
-import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import {
+  TbLayoutDashboard, TbCalendar, TbUsers, TbUserPlus, TbStethoscope, TbLogout
+} from "react-icons/tb";
 import { useAuth } from '../hooks/AuthProvider';
+import './mainLayout.css';
+
+const NAV_ITEMS = [
+  { path: '/dashboard', label: 'Dashboard', icon: TbLayoutDashboard },
+  { path: '/consultas', label: 'Agenda', icon: TbCalendar },
+];
+
+const DOUTORES_ITEMS = [
+  { path: '/visualizar-doutores', label: 'Visualizar doutores', icon: TbUsers },
+  { path: '/cadastro-doutor', label: 'Novo doutor', icon: TbUserPlus },
+];
+
+const PACIENTES_ITEMS = [
+  { path: '/visualizar-pacientes', label: 'Visualizar pacientes', icon: TbUsers },
+  { path: '/cadastro-paciente', label: 'Novo paciente', icon: TbUserPlus },
+];
+
+const getInitials = (email) => {
+  if (!email) return '?';
+  return email.substring(0, 2).toUpperCase();
+};
 
 const MainLayout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const auth = useAuth();
   const [user, setUser] = useState("");
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  useEffect(() => {
+    const precisaTrocarSenha = localStorage.getItem("precisaTrocarSenha") === "true";
+    if (precisaTrocarSenha) {
+      navigate("/redefinir-senha-obrigatoria");
+      return;
+    }
+    const userData = localStorage.getItem("emailUser");
+    setUser(userData);
+  }, []);
 
   const handleLogout = () => {
     auth.logOut();
-  }
+  };
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const userData = localStorage.getItem("emailUser");
-      setUser(userData);
-    };
+  const isActive = (path) => location.pathname === path;
 
-    fetchUser();
-  }, []);
-
-
-  console.log(user)
-
-
+  const renderItem = ({ path, label, icon: Icon }) => (
+    <div
+      key={path}
+      className={`menu-item ${isActive(path) ? 'menu-item-active' : ''}`}
+      onClick={() => navigate(path)}
+    >
+      <Icon />
+      <span>{label}</span>
+    </div>
+  );
 
   return (
     <div className="main-content">
-      <div className="menu">
-        <div>
-          <h1>ClinicCenter</h1>
-        </div>
-        <button onClick={() => navigate('/consultas')} className='button-geral-class'>Novo agendamento</button>
+      <aside className="sidebar">
 
-        <div className='div-flex-menu-option'>
-          <CiHome />
-          <h3 onClick={() => navigate('/dashboard')}>
-            Dashboard</h3>
-        </div>
-
-        <div className='div-flex-menu-option'>
-          <TfiAgenda />
-          <h3 onClick={() => navigate('/consultas')}>
-            Agenda
-          </h3>
-        </div>
-
-        <Accordion>
-          <div className='div-flex-menu-option'>
-            <AccordionSummary
-              expandIcon={<MdOutlineExpandMore />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-            >
-              <MdOutlinePersonOutline />
-              <Typography component="span">Doutores</Typography>
-            </AccordionSummary>
+        <div className="sidebar-brand">
+          <div className="sidebar-brand-icon">
+            <TbStethoscope />
           </div>
-          <AccordionDetails>
-            <h4 onClick={() => navigate("/visualizar-doutores")}>Visualizar doutores(a)</h4>
-            <h4 onClick={() => navigate("/cadastro-doutor")}>Cadastro de doutor(a)</h4>
-          </AccordionDetails>
-        </Accordion>
+          <span>ClinicCenter</span>
+        </div>
 
-        <Accordion>
-          <div className='div-flex-menu-option'>
-            <AccordionSummary
-              expandIcon={<MdOutlineExpandMore />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-            >
-              <MdOutlinePersonOutline />
-              <Typography component="span">Pacientes</Typography>
-            </AccordionSummary>
-          </div>
-          <AccordionDetails>
-            <h4 onClick={() => navigate("/visualizar-pacientes")}>Visualizar Pacientes</h4>
-            <h4 onClick={() => navigate("/cadastro-paciente")}>Novo Paciente</h4>
-          </AccordionDetails>
-        </Accordion>
+        <nav className="sidebar-nav">
+          {NAV_ITEMS.map(renderItem)}
 
-      </div>
+          <div className="sidebar-section-label">Doutores</div>
+          {DOUTORES_ITEMS.map(renderItem)}
+
+          <div className="sidebar-section-label">Pacientes</div>
+          {PACIENTES_ITEMS.map(renderItem)}
+        </nav>
+
+        <div className="sidebar-footer">
+          <div className="sidebar-avatar">{getInitials(user)}</div>
+          <div className="sidebar-user-email" title={user}>{user}</div>
+          <button onClick={handleLogout} className="sidebar-logout-btn" aria-label="Sair">
+            <TbLogout />
+          </button>
+        </div>
+
+      </aside>
 
       <div className="content">
-        <div>
-          <header>
-            <div><h2>LOGO</h2></div>
-            <div className="header-content">
-              <span><IoIosNotificationsOutline /></span>
-              <Button
-                id="demo-positioned-button"
-                aria-controls={open ? 'demo-positioned-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
-                sx={{
-                  borderRadius: "50%",
-                  padding: "20px",
-                  backgroundColor: "#1e757a",
-                  display: "flex",
-                  color: "white",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                  fontSize: "16px",
-                  fontWeight: "bold",
-                  margin: "auto",
-                  width: "20px",
-                  height: "20px",
-                  minWidth: "0"
-                }}
-              >
-                
-              </Button>
-              <Menu
-                id="demo-positioned-menu"
-                aria-labelledby="demo-positioned-button"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                sx={{
-                  top: "50px"
-                }}
-              >
-                <MenuItem onClick={handleClose}><span style={{ display: 'flex', gap: '20px' }}><FaRegUser /></span>{user}</MenuItem>
-                <MenuItem onClick={handleClose}><span style={{ display: 'flex', gap: '20px' }}><SlSettings /></span>Configurações</MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <span
-                    onClick={handleLogout}
-                    style={{ display: 'flex', gap: '20px' }}
-                  >
-                    <MdOutlineLogout />
-                  </span>Sair
-                </MenuItem>
-              </Menu>
-            </div>
-          </header>
-        </div>
         <Outlet />
       </div>
-    </div >
+    </div>
   );
 };
 

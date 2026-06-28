@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchGet } from '../../api/api';
-import './PacienteDetalhes.css';
+import './ClienteDetalhes.css';
 import type { Paciente, ConsultaData } from '../../interface/Interfaces';
 import { calcularIdade } from '../../utils/IdadeFunction';
-import imgAvatar from '../../assets/avatar-padrao.png';
+import { getInitials, getColorForString } from '../../utils/Avatar';
 import { useFetchData } from '../../hooks/useFetchData';
 import { formatarData, formatarHorario, formatarTipoAtendimento } from '../../utils/Formats';
 import { Drawer, Button } from "@mui/material";
@@ -16,13 +16,20 @@ import { CiCalendarDate } from "react-icons/ci";
 import { MdOutlineEmail } from "react-icons/md";
 import { IoIosInformationCircle } from "react-icons/io";
 
+const STATUS_BADGE: Record<string, { bg: string; color: string }> = {
+  CONSULTA: { bg: "#e6f1fb", color: "#0c447c" },
+  RETORNO: { bg: "#eaf3de", color: "#27500a" },
+  EXAME: { bg: "#fbeaf0", color: "#993556" },
+  PROCEDIMENTO: { bg: "#faeeda", color: "#854f0b" },
+  ENCAIXE: { bg: "#eeedfe", color: "#3c3489" },
+};
 
 function PacienteDetalhes() {
   const { id } = useParams();
   const [paciente, setPaciente] = useState<Paciente | null>(null);
   const [pacienteConsulta, setPacienteConsulta] = useState<ConsultaData[]>([]);
   const { data: consultas } = useFetchData<ConsultaData>('consultas');
-  const [open, setOpen] = useState(false); // Estado para abrir/fechar o modal
+  const [open, setOpen] = useState(false);
 
   const toggleDrawer = (state: boolean) => {
     setOpen(state);
@@ -71,101 +78,112 @@ function PacienteDetalhes() {
   };
 
   const idadePaciente = calcularIdade(paciente.date);
-
-  filterTipoAtendimento("CONSULTA")
+  const avatarColor = getColorForString(paciente.nome);
+  const temPlano = !!paciente.planoDeSaude;
+  const planoColor = temPlano ? getColorForString(paciente.planoDeSaude) : { bg: '#f1efe8', text: '#444441' };
 
   return (
     <>
-      <h2>{paciente.nome}</h2>
       <section className="detalhes-sec">
         <div className="detalhes-div-flex">
-          <div className="div-1">
-            <img src={imgAvatar} alt="Imagem Avatar" />
 
-            <div className="info">
+          <div className="detalhes-card-header">
+            <div
+              className="detalhes-avatar"
+              style={{ background: avatarColor.bg, color: avatarColor.text }}
+            >
+              {getInitials(paciente.nome)}
+            </div>
+
+            <div className="detalhes-info-principal">
               <h3>{paciente.nome}</h3>
-              <p>{paciente.telefone}</p>
-              <p>{idadePaciente} anos</p>
+              <div className="detalhes-info-linha">
+                <span><IoPhonePortraitOutline /> {paciente.telefone}</span>
+                <span><CiCalendarDate /> {idadePaciente} anos</span>
+              </div>
             </div>
 
-            <div className='info'>
-              <h3>Plano</h3>
-              <p>{paciente.numeroPlano || "N/A"}</p>
+            <div className="detalhes-plano-badge">
+              <span style={{ background: planoColor.bg, color: planoColor.text }}>
+                {/* CORRIGIDO: badge mostra o nome do plano, não o número */}
+                {temPlano ? paciente.planoDeSaude : "Sem plano"}
+              </span>
             </div>
 
-            <ul>
-              <li><button onClick={() => toggleDrawer(true)} style={{
-                display:'flex'
-              }}>
-                <span><IoIosInformationCircle/></span>
-                Informações
-                </button></li>
-            </ul>
+            <button className="detalhes-btn-info" onClick={() => toggleDrawer(true)}>
+              <IoIosInformationCircle />
+              Informações
+            </button>
           </div>
 
-          <div className="div-2">
-            <div>
-              <h3>Futuros agendamentos:</h3>
-              {pacienteConsulta.length > 0 ? (
-                pacienteConsulta.map((item, index) => (
-                  <p key={index}>
-                    {formatarTipoAtendimento(item.tipoAtendimento)} com {item.medicoNome} às {formatarHorario(item.horario)} em {formatarData(item.dateTime)}
-                  </p>
-                ))
-              ) : (
-                <p>Nenhuma consulta agendada.</p>
-              )}
-            </div>
-
-            <div>
-              <h3>Observações:</h3>
-              <p>Paciente sensível a dor</p>
-            </div>
-          </div>
-
-          <div className='detalhes-div-filtros'>
-
-            <div className='detalhes-div-card'>
-              <span>{filterTipoAtendimento("EXAME").length}</span>
+          <div className="detalhes-div-filtros">
+            <div className="detalhes-div-card" style={{ borderColor: STATUS_BADGE.EXAME.color }}>
+              <span style={{ color: STATUS_BADGE.EXAME.color }}>{filterTipoAtendimento("EXAME").length}</span>
               <p>Exames</p>
             </div>
 
-            <div className='detalhes-div-card'>
-              <span>{filterTipoAtendimento("CONSULTA").length}</span>
+            <div className="detalhes-div-card" style={{ borderColor: STATUS_BADGE.CONSULTA.color }}>
+              <span style={{ color: STATUS_BADGE.CONSULTA.color }}>{filterTipoAtendimento("CONSULTA").length}</span>
               <p>Consultas</p>
             </div>
 
-            <div className='detalhes-div-card'>
-              <span>{filterTipoAtendimento("PROCEDIMENTO").length}</span>
+            <div className="detalhes-div-card" style={{ borderColor: STATUS_BADGE.PROCEDIMENTO.color }}>
+              <span style={{ color: STATUS_BADGE.PROCEDIMENTO.color }}>{filterTipoAtendimento("PROCEDIMENTO").length}</span>
               <p>Procedimentos</p>
             </div>
 
-            <div className='detalhes-div-card'>
-              <span>{filterTipoAtendimento("RETORNO").length}</span>
-              <p>Retorno</p>
+            <div className="detalhes-div-card" style={{ borderColor: STATUS_BADGE.RETORNO.color }}>
+              <span style={{ color: STATUS_BADGE.RETORNO.color }}>{filterTipoAtendimento("RETORNO").length}</span>
+              <p>Retornos</p>
             </div>
 
-            <div className='detalhes-div-card'>
-              <span>{filterStatus()}</span>
-              <p>Cancelados/Faltas</p>
+            <div className="detalhes-div-card" style={{ borderColor: "#791f1f" }}>
+              <span style={{ color: "#791f1f" }}>{filterStatus()}</span>
+              <p>Faltas</p>
+            </div>
+          </div>
+
+          <div className="detalhes-div-2">
+            <div className="detalhes-card-info">
+              <h3>Próximos agendamentos</h3>
+              {pacienteConsulta.length > 0 ? (
+                pacienteConsulta.map((item, index) => {
+                  const badge = STATUS_BADGE[item.tipoAtendimento] ?? STATUS_BADGE.CONSULTA;
+                  return (
+                    <div className="detalhes-agendamento-item" key={index}>
+                      <span style={{ background: badge.bg, color: badge.color }}>
+                        {formatarTipoAtendimento(item.tipoAtendimento)}
+                      </span>
+                      com {item.medicoNome} às {formatarHorario(item.horario)} em {formatarData(item.dateTime)}
+                    </div>
+                  );
+                })
+              ) : (
+                <p className="detalhes-vazio">Nenhuma consulta agendada.</p>
+              )}
+            </div>
+
+            <div className="detalhes-card-info">
+              <h3>Observações</h3>
+              <p>Cliente sensível a dor</p>
             </div>
           </div>
         </div>
+
         <Drawer
           anchor="right"
           open={open}
           onClose={() => toggleDrawer(false)}
           sx={{
             "& .MuiDrawer-paper": {
-              width: "15%", 
-              padding: "20px",
+              width: "320px",
+              padding: "24px",
               gap: '15px'
             },
           }}
         >
-
           <div>
-          <h3>Sobre o Paciente</h3>
+            <h3>Sobre o cliente</h3>
           </div>
 
           <div>
@@ -210,29 +228,31 @@ function PacienteDetalhes() {
 
           <div>
             <div className='div-flex-infos'>
-            <span><MdOutlineEmail/></span><strong>Email:</strong>
+              <span><MdOutlineEmail /></span><strong>Email:</strong>
             </div>
             <p>{paciente.email}</p>
           </div>
 
           <div>
             <div className='div-flex-infos'>
-            <span><HiOutlineIdentification /></span><strong>Plano:</strong>
+              <span><HiOutlineIdentification /></span><strong>Plano:</strong>
             </div>
-            <p>{paciente.numeroPlano || "N/A"}</p>
-          </div>
-
-          <div>
-            <div className='div-flex-infos'>
-            <strong>Número do Plano:</strong>
-            </div>
+            {/* CORRIGIDO: Plano mostra o nome do plano */}
             <p>{paciente.planoDeSaude || "N/A"}</p>
           </div>
 
           <div>
             <div className='div-flex-infos'>
-            <span><CiCalendarDate /></span>
-            <strong>Data de Cadastro</strong>
+              <strong>Número do Plano:</strong>
+            </div>
+            {/* CORRIGIDO: Número do Plano mostra o número */}
+            <p>{paciente.numeroPlano || "N/A"}</p>
+          </div>
+
+          <div>
+            <div className='div-flex-infos'>
+              <span><CiCalendarDate /></span>
+              <strong>Data de Cadastro</strong>
             </div>
             <p>{formatarData(paciente.dataCadastro)}</p>
           </div>
@@ -240,7 +260,7 @@ function PacienteDetalhes() {
           <Button variant="contained" color="secondary" onClick={() => toggleDrawer(false)}>
             Fechar
           </Button>
-          
+
         </Drawer>
       </section>
     </>

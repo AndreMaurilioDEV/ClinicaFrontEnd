@@ -6,9 +6,20 @@ const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('authToken') || ''}`
   }
 });
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("authToken");
+
+  if (token) {
+    config.headers = config.headers || {};
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
 
 export const fetchData = async <T extends CommonData>(
   endpoint: string,
@@ -26,17 +37,23 @@ export const fetchData = async <T extends CommonData>(
 
 export const fetchPost = async (payload: object, endpoint: string) => {
   try {
-    const axiosConfig = { headers: { 'Content-Type': 'application/json' } };
-    await axios.post(API_URL + endpoint, payload, axiosConfig);
+    //const axiosConfig = { headers: { 'Content-Type': 'application/json' } };
+    const response = await api.post(endpoint, payload);
+    return response;
   } catch (error) {
-    console.error('Erro ao enviar dados do formulário:', error);
+    if (axios.isAxiosError(error)) {
+      console.log(error.response?.status);
+      console.log(error.response?.data);
+    }
+
+    throw error;
   }
 };
 
 export const fetchGet = async (endpoint: string) => {
   try {
-    const axiosConfig = { headers: { 'Content-Type': 'application/json' } };
-    const response = await axios.get(`${API_URL}/${endpoint}`, axiosConfig);
+    //const axiosConfig = { headers: { 'Content-Type': 'application/json' } };
+    const response = await api.get(endpoint);
     return response.data;
   } catch (error) {
     console.error('Erro ao buscar dados:', error);

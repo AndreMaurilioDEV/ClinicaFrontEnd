@@ -8,6 +8,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthProvider";
 import { useSnackbar } from "notistack";
+import './RedefinicaoRequest.css';
 
 function RedefinicaoRequest() {
   const [form, setForm] = useState({ email: "" });

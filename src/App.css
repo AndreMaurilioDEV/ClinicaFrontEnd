@@ -421,3 +421,133 @@ div label {
   gap: 15px;
 }
 
+.cadastro-card {
+  background: #ffffff;
+  border: 1px solid #e3e6ea;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(20, 40, 45, 0.06);
+  width: 100%;
+  max-width: 760px;
+  padding: 32px;
+}
+
+.cadastro-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eef0f2;
+}
+
+.cadastro-icon-disc {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #e6f2f2;
+  color: #1e757a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.cadastro-card-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #222;
+  border-bottom: none;
+  padding-bottom: 0;
+  text-align: left;
+}
+
+.cadastro-card-header p {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: #667085;
+}
+
+.cadastro-section {
+  margin-bottom: 26px;
+}
+
+.cadastro-section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1e757a;
+  margin-bottom: 14px;
+}
+
+.cadastro-section-label svg {
+  font-size: 16px;
+}
+
+.cadastro-section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.cadastro-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid #eef0f2;
+}
+
+.btn-primary,
+.btn-secondary {
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #1e757a;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #15565a;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #667085;
+  border: 1px solid #d8dce1;
+}
+
+.btn-secondary:hover {
+  background-color: #f3f4f6;
+  border-color: #c5cad1;
+}
+
+@media (max-width: 640px) {
+  .cadastro-card {
+    padding: 22px;
+  }
+  .cadastro-section-grid {
+    grid-template-columns: 1fr;
+  }
+  .cadastro-footer {
+    flex-direction: column-reverse;
+  }
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+}

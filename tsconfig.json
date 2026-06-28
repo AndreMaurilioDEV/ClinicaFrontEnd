@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "target": "es5",
+    "jsx": "react-jsx",
+    "target": "ES2020",
     "allowJs": true,
     "esModuleInterop": true,
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -9,11 +9,12 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "composite": true  
+    "composite": true,
+    "types": ["vite/client"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

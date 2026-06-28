@@ -1,0 +1,144 @@
+.pacientes-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.pacientes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pacientes-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.pacientes-header p {
+  margin: 2px 0 0;
+  font-size: 0.82rem;
+  color: #667085;
+  font-weight: 400;
+}
+
+.pacientes-search {
+  min-width: 240px;
+  background: #fafbfc;
+}
+
+.pacientes-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.paciente-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid #e3e6ea;
+  border-radius: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.paciente-row:hover {
+  border-color: #1e757a;
+}
+
+.paciente-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.paciente-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.paciente-nome {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #1f2937;
+}
+
+.paciente-cpf {
+  font-size: 0.78rem;
+  color: #667085;
+  margin-top: 2px;
+}
+
+.paciente-idade {
+  width: 90px;
+  font-size: 0.82rem;
+  color: #667085;
+}
+
+.paciente-plano {
+  width: 160px;
+}
+
+.paciente-plano span {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.paciente-icon-btn {
+  background: transparent;
+  border: none;
+  color: #98a2b3;
+  font-size: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.paciente-icon-danger:hover {
+  color: #e24b4a;
+}
+
+.paciente-chevron {
+  color: #98a2b3;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .paciente-row {
+    flex-wrap: wrap;
+  }
+  .paciente-idade,
+  .paciente-plano {
+    width: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .pacientes-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pacientes-search {
+    width: 100%;
+    min-width: 0;
+  }
+}

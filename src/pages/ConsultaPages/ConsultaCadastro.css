@@ -1,47 +1,176 @@
-.cadastro-consulta .form-group {
+.cadastro-consulta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
+  justify-content: center;
+  padding: 30px 16px;
+}
+
+.consulta-card {
+  background: #ffffff;
+  border: 1px solid #e3e6ea;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(20, 40, 45, 0.06);
+  width: 100%;
+  max-width: 720px;
+  padding: 32px;
+}
+
+.consulta-card-header {
+  display: flex;
   align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eef0f2;
+}
+
+.consulta-icon-disc {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #e6f2f2;
+  color: #1e757a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.consulta-card-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.consulta-card-header p {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: #667085;
+}
+
+.consulta-section {
+  margin-bottom: 26px;
+}
+
+.consulta-section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1e757a;
+  margin-bottom: 14px;
+}
+
+.consulta-section-label svg {
+  font-size: 16px;
+}
+
+.consulta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
 
 .cadastro-consulta label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #475467;
+  margin-bottom: 6px;
 }
 
-/* Inputs e Selects */
-.cadastro-consulta input, 
+.cadastro-consulta input,
 .cadastro-consulta select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid #d8dce1;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-family: "Poppins", sans-serif;
+  background: #fafbfc;
+  color: #1f2937;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.cadastro-consulta .btn-cadastrar {
-  padding: 10px 15px;
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-bottom: 15px;
+.cadastro-consulta input:focus,
+.cadastro-consulta select:focus {
+  outline: none;
+  border-color: #1e757a;
+  box-shadow: 0 0 0 3px rgba(30, 117, 122, 0.12);
+  background: #ffffff;
 }
 
-.cadastro-consulta .btn-cadastrar:hover {
-  background-color: #45a049;
+.cadastro-consulta .react-datepicker-wrapper {
+  width: 100%;
 }
 
 .cadastro-consulta .input-horario {
-  width: 120px; 
-  padding: 6px; 
-  font-size: 14px; 
+  width: 100%;
 }
 
-.cadastro-consulta h2 {
-  text-align: center;
+.consulta-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid #eef0f2;
+}
+
+.btn-cadastrar,
+.btn-limpar {
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-cadastrar {
+  background-color: #1e757a;
+  color: #fff;
+  border: none;
+}
+
+.btn-cadastrar:hover {
+  background-color: #15565a;
+}
+
+.btn-limpar {
+  background-color: transparent;
+  color: #667085;
+  border: 1px solid #d8dce1;
+}
+
+.btn-limpar:hover {
+  background-color: #f3f4f6;
+  border-color: #c5cad1;
+}
+
+@media (max-width: 640px) {
+  .consulta-card {
+    padding: 22px;
+  }
+  .consulta-grid {
+    grid-template-columns: 1fr;
+  }
+  .consulta-footer {
+    flex-direction: column-reverse;
+  }
+  .btn-cadastrar,
+  .btn-limpar {
+    width: 100%;
+  }
 }

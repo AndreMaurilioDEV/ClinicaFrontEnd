@@ -3,14 +3,14 @@ import { Routes, Route } from 'react-router-dom'
 import Login from './pages/LoginPage/Login'
 import DashboardPage from './pages/DashboardPage/DashboardPage'
 import ThemeProvider from './themeProvider/theme'
-import CadastroDoutor from './pages/ProfissionalPage/DoutorCadastro';
-import PacienteCadastro from './pages/PacientePage/PacienteCadastro';
+import CadastroDoutor from './pages/ProfissionalPage/ProfissionalCadastro';
+import PacienteCadastro from './pages/PacientePage/ClienteCadastro';
 import Consultas from './pages/ConsultaPages/Consultas'
 import MainLayout from './Outlet/mainLayout'
-import Doutores from './pages/ProfissionalPage/Doutores'
-import Pacientes from './pages/PacientePage/Pacientes'
+import Doutores from './pages/ProfissionalPage/Profissionais'
+import Pacientes from './pages/PacientePage/Clientes'
 import CadastroConsulta from './pages/ConsultaPages/ConsultaCadastro'
-import PacienteDetalhes from './pages/PacientePage/PacienteDetalhes'
+import PacienteDetalhes from './pages/PacientePage/ClienteDetalhes'
 import AlterarSenha from './pages/LoginPage/AlterarSenha'
 import RedifinicaoRequest from './pages/SenhaPages/RedifinicaoRequest'
 import ConfirmarRedefinicao from './pages/SenhaPages/ConfirmarRedifinicao'
@@ -34,6 +34,7 @@ function App() {
             <Route path="/esqueci-senha" element={<RedifinicaoRequest />} />
             <Route path="/verificacao" element={<ConfirmarRedefinicao />} />
             <Route path="/redefinir-senha" element={<AlterarSenha />} />
+            <Route path="/redefinir-senha-obrigatoria" element={<AlterarSenha obrigatorio />} />
 
             <Route element={<MainLayout />}>
               <Route path="/dashboard" element={<DashboardPage />} />

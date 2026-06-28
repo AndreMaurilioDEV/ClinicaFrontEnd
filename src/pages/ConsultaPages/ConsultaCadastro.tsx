@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useAuth } from "../../hooks/AuthProvider";
 import { useSnackbar } from "notistack";
 import { AxiosError } from "axios";
+import { IoCalendarOutline, IoTimeOutline, IoPeopleOutline, IoClipboardOutline } from "react-icons/io5";
 
 interface CadastroConsultaProps {
   showForm: boolean;
@@ -92,108 +93,141 @@ function CadastroConsulta() {
 
   return (
     <>
-      <section className="cadastro-consulta">
+    <section className="cadastro-consulta">
+      <div className="consulta-card">
 
-        <h2>Nova Consulta</h2>
-        <div className="div-cadastro-flex">
-          <div className="div-cadastro">
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}>
-              <div className="div-cadastro-flex">
-                <div className="form-group">
-                  <label htmlFor="data">Data:</label>
-                  <DatePicker
-                    selected={formCadastro.date}
-                    onChange={handleDateChange}
-                    name="date"
-                    className="input-data"
-                    dateFormat="dd/MM/yyyy"
-                  />
-
-
-                  <label htmlFor="horario">Horário:</label>
-                  <input
-                    type="time"
-                    id="horario"
-                    name="horario"
-                    value={formCadastro.horario}
-                    onChange={handleChange}
-                    className="input-horario"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="medicoId">Profissional:</label>
-                  <select
-                    id="medicoId"
-                    name="medicoId"
-                    value={formCadastro.medicoId}
-                    onChange={(e) => setFormCadastro({ ...formCadastro, medicoId: Number(e.target.value) })}
-                    className="select-medico"
-                  >
-                    <option value="">Selecione o Médico</option>
-                    {doutores?.map((doutor) => (
-                      <option value={doutor.id} key={doutor.id}>{doutor.nome}</option>
-                    ))}
-                  </select>
-
-                  <label htmlFor="pacienteId">Paciente:</label>
-                  <select
-                    id="pacienteId"
-                    name="pacienteId"
-                    value={formCadastro.pacienteId}
-                    onChange={(e) =>
-                      setFormCadastro({ ...formCadastro, pacienteId: Number(e.target.value) })
-                    }
-                    className="select-paciente"
-                  >
-                    <option value="">Selecione o Paciente</option>
-                    {pacientes?.map((paciente) => (
-                      <option value={paciente.id} key={paciente.id}>
-                        {paciente.nome}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="status">Status:</label>
-                  <select
-                    id="status"
-                    name="status"
-                    value={formCadastro.status}
-                    onChange={(e) =>
-                      setFormCadastro({ ...formCadastro, status: e.target.value })
-                    }
-                    className="select-status"
-                  >
-                    <option value="AGENDADO">Agendado</option>
-                  </select>
-
-                  <label htmlFor="tipoAtendimento">Atendimento:</label>
-                  <select
-                    id="tipoAtendimento"
-                    name="tipoAtendimento"
-                    value={formCadastro.tipoAtendimento}
-                    onChange={(e) =>
-                      setFormCadastro({ ...formCadastro, tipoAtendimento: e.target.value })
-                    }
-                    className="select-tipo"
-                  >
-                    <option value="">Seleciona o Atendimento</option>
-                    <option value="CONSULTA">Consulta</option>
-                    <option value="EXAME">Exame</option>
-                    <option value="PROCEDIMENTO">Procedimento</option>
-                    <option value="ENCAIXE">Encaixe</option>
-                    <option value="RETORNO">Retorno</option>
-                  </select>
-                </div>
-                <button type="submit" className="btn-cadastrar">Cadastrar</button>
-              </div>
-            </form>
+        <div className="consulta-card-header">
+          <div className="consulta-icon-disc">
+            <IoCalendarOutline />
+          </div>
+          <div>
+            <h2>Novo Agendamento</h2>
+            <p>Preencha os dados para agendar um atendimento</p>
           </div>
         </div>
-      </section>
+
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}>
+
+          <div className="consulta-section">
+            <div className="consulta-section-label">
+              <IoTimeOutline /><span>Quando</span>
+            </div>
+            <div className="consulta-grid">
+              <div className="form-group">
+                <label htmlFor="data">Data</label>
+                <DatePicker
+                  selected={formCadastro.date}
+                  onChange={handleDateChange}
+                  name="date"
+                  className="input-data"
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText="Selecione a data"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="horario">Horário</label>
+                <input
+                  type="time"
+                  id="horario"
+                  name="horario"
+                  value={formCadastro.horario}
+                  onChange={handleChange}
+                  className="input-horario"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="consulta-section">
+            <div className="consulta-section-label">
+              <IoPeopleOutline /><span>Quem</span>
+            </div>
+            <div className="consulta-grid">
+              <div className="form-group">
+                <label htmlFor="medicoId">Profissional</label>
+                <select
+                  id="medicoId"
+                  name="medicoId"
+                  value={formCadastro.medicoId}
+                  onChange={(e) => setFormCadastro({ ...formCadastro, medicoId: Number(e.target.value) })}
+                  className="select-medico"
+                >
+                  <option value="">Selecione o Médico</option>
+                  {doutores?.map((doutor) => (
+                    <option value={doutor.id} key={doutor.id}>{doutor.nome}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="pacienteId">Paciente</label>
+                <select
+                  id="pacienteId"
+                  name="pacienteId"
+                  value={formCadastro.pacienteId}
+                  onChange={(e) => setFormCadastro({ ...formCadastro, pacienteId: Number(e.target.value) })}
+                  className="select-paciente"
+                >
+                  <option value="">Selecione o Paciente</option>
+                  {pacientes?.map((paciente) => (
+                    <option value={paciente.id} key={paciente.id}>{paciente.nome}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div className="consulta-section">
+            <div className="consulta-section-label">
+              <IoClipboardOutline /><span>Atendimento</span>
+            </div>
+            <div className="consulta-grid">
+              <div className="form-group">
+                <label htmlFor="status">Status</label>
+                <select
+                  id="status"
+                  name="status"
+                  value={formCadastro.status}
+                  onChange={(e) => setFormCadastro({ ...formCadastro, status: e.target.value })}
+                  className="select-status"
+                >
+                  <option value="AGENDADO">Agendado</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="tipoAtendimento">Tipo</label>
+                <select
+                  id="tipoAtendimento"
+                  name="tipoAtendimento"
+                  value={formCadastro.tipoAtendimento}
+                  onChange={(e) => setFormCadastro({ ...formCadastro, tipoAtendimento: e.target.value })}
+                  className="select-tipo"
+                >
+                  <option value="">Selecione o Atendimento</option>
+                  <option value="CONSULTA">Consulta</option>
+                  <option value="EXAME">Exame</option>
+                  <option value="PROCEDIMENTO">Procedimento</option>
+                  <option value="ENCAIXE">Encaixe</option>
+                  <option value="RETORNO">Retorno</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div className="consulta-footer">
+            <button type="button" className="btn-limpar" onClick={handleClear}>
+              Limpar
+            </button>
+            <button type="submit" className="btn-cadastrar">
+              Cadastrar
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </section>
     </>
   )
 };

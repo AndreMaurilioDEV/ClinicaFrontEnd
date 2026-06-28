@@ -7,9 +7,9 @@ import {
   ArcElement,
   Tooltip,
   Legend,
-  plugins,
   type Chart,
-  ChartData
+  type ChartData,
+  type ChartOptions
 } from 'chart.js';
 
 import { Doughnut } from 'react-chartjs-2';
@@ -151,7 +151,7 @@ const Dashboard = () => {
     labels: ["Masculino", "Feminino", "Outro"],
     datasets: [
       {
-        label: 'Gênero de Pacientes',
+        label: 'Gênero de Clientes',
         data: [
           filterPacienteGenero("MASCULINO")?.length || 0,
           filterPacienteGenero("FEMININO")?.length || 0,
@@ -181,7 +181,7 @@ const Dashboard = () => {
     }
   };
 
-  const options = {
+  const options: ChartOptions<'pie' | 'doughnut'> = {
     responsive: true,
     plugins: {
       legend: {
@@ -258,7 +258,7 @@ const Dashboard = () => {
               <div><span>{consultasTotais ? consultasTotais?.length : 0}</span></div>
               <div className='dashboard-relatorios-infos'>
                 <i><FaRegCheckCircle /></i>
-                <p>Pacientes Agendados</p>
+                <p>Clientes agendados</p>
               </div>
             </div>
 
@@ -269,7 +269,7 @@ const Dashboard = () => {
               <div>
                 <div className='dashboard-relatorios-infos'>
                   <i><FaRegCheckCircle /></i>
-                  <p>Pacientes Atendidos</p>
+                  <p>Clientes atendidos</p>
                 </div>
               </div>
             </div>
@@ -277,14 +277,14 @@ const Dashboard = () => {
               <div><span>{consultasFaltas ? consultasFaltas.length : 0}</span></div>
               <div className='dashboard-relatorios-infos'>
                 <i><FaRegCheckCircle /></i>
-                <p>Pacientes que Faltaram</p>
+                <p>Clientes que faltaram</p>
               </div>
             </div>
 
           </div>
 
           <div className='div-pacientes'>
-            <h3>Paciente Recentes</h3>
+            <h3>Clientes recentes</h3>
             <div className='div-pacientes-details'>
               {pacientesFiltrados?.slice(0, 4)
                 .map((item) => (
@@ -305,7 +305,7 @@ const Dashboard = () => {
               }}>{FilterConsultasHoje()?.length}</span>
             </div>
             <div>
-              <p>Paciente(s) aguardando</p>
+              <p>Cliente(s) aguardando</p>
             </div>
             </div>
           </div>

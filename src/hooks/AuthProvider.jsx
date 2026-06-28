@@ -25,19 +25,27 @@ const AuthProvider = ({ children }) => {
     (error) => Promise.reject(error)
   );
 
-  const loginAction = async (data) => {
-    try {
-      const response = await api.post('/auth/login', data, {
-        headers: { 'Content-Type': 'application/json' }
-      });
+    const loginAction = async (data) => {
+      try {
+    const response = await api.post('/auth/login', data, {
+      headers: { 'Content-Type': 'application/json' }
+    });
 
-      if (response.data) {
-        setUser(response.data.user);
-        setToken(response.data.token);
-        localStorage.setItem("authToken", response.data.token);
+    if (response.data) {
+      setToken(response.data.token);
+      localStorage.setItem("authToken", response.data.token);
+
+      const precisaTrocarSenha = response.data.isConfirmed === false;
+      localStorage.setItem("precisaTrocarSenha", String(precisaTrocarSenha));
+
+      console.log(response.data)
+      if (precisaTrocarSenha) {
+        navigate("/redefinir-senha-obrigatoria");
+      } else {
         navigate("/dashboard");
-        return response;
       }
+      return response;
+    }
       throw new Error(response.message);
     } catch (err) {
       console.error(err);
@@ -45,16 +53,22 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const concluirTrocaSenhaObrigatoria = () => {
+    localStorage.setItem("precisaTrocarSenha", "false");
+    navigate("/dashboard");
+  };
+
   const logOut = () => {
     setUser(null);
     setToken("");
     localStorage.removeItem("authToken");
     localStorage.removeItem("emailUser");
+    localStorage.removeItem("precisaTrocarSenha");
     navigate("/");
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, loginAction, logOut, api }}>
+    <AuthContext.Provider value={{ token, user, loginAction, logOut, api, concluirTrocaSenhaObrigatoria }}>
       {children}
     </AuthContext.Provider>
   );

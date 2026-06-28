@@ -1,0 +1,148 @@
+.doutores-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.doutores-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.doutores-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.doutores-header p {
+  margin: 2px 0 0;
+  font-size: 0.82rem;
+  color: #667085;
+  font-weight: 400;
+}
+
+.doutores-search {
+  min-width: 240px;
+  background: #fafbfc;
+}
+
+.doutores-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.doutor-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid #e3e6ea;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.doutor-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.doutor-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.doutor-nome {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #1f2937;
+}
+
+.doutor-crm {
+  font-size: 0.78rem;
+  color: #667085;
+  margin-top: 2px;
+}
+
+.doutor-especialidade {
+  width: 160px;
+}
+
+.doutor-especialidade span {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.doutor-nascimento {
+  width: 130px;
+  font-size: 0.82rem;
+  color: #667085;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.doutor-nascimento svg {
+  font-size: 15px;
+}
+
+.doutor-acoes {
+  display: flex;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.doutor-icon-btn {
+  background: transparent;
+  border: none;
+  color: #98a2b3;
+  font-size: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.doutor-icon-btn:hover {
+  color: #1e757a;
+}
+
+.doutor-icon-danger:hover {
+  color: #e24b4a;
+}
+
+@media (max-width: 900px) {
+  .doutor-row {
+    flex-wrap: wrap;
+  }
+  .doutor-especialidade,
+  .doutor-nascimento {
+    width: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .doutores-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .doutores-search {
+    width: 100%;
+    min-width: 0;
+  }
+}
