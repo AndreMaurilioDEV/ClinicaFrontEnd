@@ -6,14 +6,15 @@
 .detalhes-div-flex {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
+/* Cabeçalho */
 .detalhes-card-header {
   background: #fff;
   border: 1px solid #e3e6ea;
   border-radius: 14px;
-  padding: 20px 22px;
+  padding: 18px 22px;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -21,72 +22,107 @@
 }
 
 .detalhes-avatar {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   flex-shrink: 0;
 }
 
 .detalhes-info-principal {
   flex: 1;
-  min-width: 200px;
+  min-width: 160px;
 }
 
 .detalhes-info-principal h3 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #1f2937;
 }
 
 .detalhes-info-linha {
   display: flex;
-  gap: 14px;
+  gap: 8px;
   flex-wrap: wrap;
   margin-top: 4px;
   font-size: 0.82rem;
   color: #667085;
-}
-
-.detalhes-info-linha span {
-  display: flex;
   align-items: center;
-  gap: 4px;
 }
 
-.detalhes-plano-badge span {
+.detalhes-plano-badge-inline {
   font-size: 0.74rem;
   font-weight: 600;
   padding: 5px 12px;
   border-radius: 20px;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.detalhes-btn-info {
-  height: 38px;
-  padding: 0 16px;
-  border-radius: 8px;
-  background: #1e757a;
-  color: #fff;
-  border: none;
-  font-weight: 600;
-  font-size: 0.82rem;
+/* Grid 2 colunas */
+.detalhes-div-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Cards genéricos */
+.detalhes-card-info {
+  background: #fff;
+  border: 1px solid #e3e6ea;
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.detalhes-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #1e757a;
+  margin-bottom: 12px;
+}
+
+/* Linhas de info (chave/valor) */
+.detalhes-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.83rem;
+  padding: 6px 0;
+  border-bottom: 1px solid #f3f4f6;
+  gap: 8px;
+}
+
+.detalhes-info-row:last-child {
+  border-bottom: none;
+}
+
+.detalhes-info-key {
   display: flex;
   align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
+  gap: 5px;
+  color: #98a2b3;
+  white-space: nowrap;
 }
 
-.detalhes-btn-info:hover {
-  background: #15565a;
+.detalhes-info-key svg {
+  font-size: 14px;
 }
 
+.detalhes-info-val {
+  color: #1f2937;
+  font-weight: 500;
+  text-align: right;
+  word-break: break-word;
+}
+
+/* Contadores */
 .detalhes-div-filtros {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -110,39 +146,18 @@
 
 .detalhes-div-card p {
   margin: 4px 0 0;
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   color: #667085;
 }
 
-.detalhes-div-2 {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 16px;
-}
-
-.detalhes-card-info {
-  background: #fff;
-  border: 1px solid #e3e6ea;
-  border-radius: 12px;
-  padding: 18px 20px;
-}
-
-.detalhes-card-info h3 {
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #1e757a;
-  margin: 0 0 12px;
-}
-
+/* Agendamentos */
 .detalhes-agendamento-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 0;
+  padding: 9px 0;
   border-bottom: 1px solid #eef0f2;
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   color: #1f2937;
 }
 
@@ -151,7 +166,7 @@
 }
 
 .detalhes-agendamento-item span {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 600;
   padding: 3px 10px;
   border-radius: 20px;
@@ -159,33 +174,16 @@
 }
 
 .detalhes-vazio {
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   color: #98a2b3;
 }
 
-.detalhes-card-info p {
-  font-size: 0.85rem;
-  color: #475467;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.div-flex-infos {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.div-flex-infos span {
-  font-size: 16px;
-  color: #1e757a;
-}
-
+/* Responsivo */
 @media (max-width: 900px) {
   .detalhes-div-filtros {
     grid-template-columns: repeat(3, 1fr);
   }
-  .detalhes-div-2 {
+  .detalhes-div-2col {
     grid-template-columns: 1fr;
   }
 }
