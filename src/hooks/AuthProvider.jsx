@@ -7,24 +7,15 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('authToken') || '');
   const navigate = useNavigate();
   
   const api = axios.create({
     baseURL: API_URL,
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
+    withCredentials: true,
   });
 
-  api.interceptors.request.use(
-    (config) => {
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      return config;
-    },
-    (error) => Promise.reject(error)
-  );
-
+  
     const loginAction = async (data) => {
       try {
     const response = await api.post('/auth/login', data, {
@@ -32,9 +23,7 @@ const AuthProvider = ({ children }) => {
     });
 
     if (response.data) {
-      setToken(response.data.token);
-      localStorage.setItem("authToken", response.data.token);
-
+     
       const precisaTrocarSenha = response.data.isConfirmed === false;
       localStorage.setItem("precisaTrocarSenha", String(precisaTrocarSenha));
 
@@ -58,17 +47,16 @@ const AuthProvider = ({ children }) => {
     navigate("/dashboard");
   };
 
-  const logOut = () => {
+  const logOut = async () => {
+    await api.post('/auth/logout');
     setUser(null);
-    setToken("");
-    localStorage.removeItem("authToken");
     localStorage.removeItem("emailUser");
     localStorage.removeItem("precisaTrocarSenha");
     navigate("/");
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, loginAction, logOut, api, concluirTrocaSenhaObrigatoria }}>
+    <AuthContext.Provider value={{user, loginAction, logOut, api, concluirTrocaSenhaObrigatoria }}>
       {children}
     </AuthContext.Provider>
   );
